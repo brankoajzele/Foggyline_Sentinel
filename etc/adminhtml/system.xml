@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Foggyline. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="system">
+            <group id="foggyline_sentinel" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sentinel by Foggyline</label>
+                <comment><![CDATA[Log all actions performed in store backend by admin users, view log history on the grid and keep the log records for as long as you need. View login activity and block malicious login attempts. Know what have been done in your store admin panel and by whom. Assign permissions to users for editing products and categories, Magento store-views and websites. No mess when having a lot of users in your store - vendors, category managers, etc – let them see and edit certain categories and products.]]></comment>
+
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+
+                <!-- Access Logging logic -->
+                <field id="exclude_areas" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude Areas from Logging</label>
+                    <comment><![CDATA[By default, "frontend" area has is excluded from logging, unless differently marked above.]]></comment>
+                    <source_model>Foggyline\Sentinel\Model\Config\Source\AreaList</source_model>
+                </field>
+                <field id="exclude_actions" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude Actions from Logging</label>
+                    <comment>Comma separated list of actions to exclude from logging; eg. "catalog_category_save,adminhtml_dashboard_index,adminhtml_system_config_save", etc. By default, following actions are excluded "mui_index_render,mui_bookmark_save,customer_section_load", unless differently marked above.</comment>
+                </field>
+
+                <field id="clean_after_hours" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Save Log, Hours</label>
+                    <comment><![CDATA[Full integer value, defaults to "48" hours. Implemented as Magento "foggyline_sentinel_cleanup" cron job. Operating system cron has to be set to trigger Magento cron.]]></comment>
+                </field>
+
+                <!-- Query Logging logic -->
+                <field id="query_log_active" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Query Logger Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="query_log_all_queries" translate="label" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log All Queries</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="query_log_query_time" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log Query Time</label>
+                </field>
+
+                <field id="query_log_call_stack" translate="label" type="select" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log Call Stack</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="query_log_query_chunks" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log Query Chunks</label>
+                </field>
+
+                <field id="query_log_clean_after_hours" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log Query Clean After Hours</label>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

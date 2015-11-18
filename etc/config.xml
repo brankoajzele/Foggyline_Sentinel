@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Foggyline. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <system>
+            <foggyline_sentinel>
+                <active>1</active>
+                <exclude_areas>frontend</exclude_areas>
+                <exclude_actions>foggyline_sentinel_log_index,mui_index_render,mui_bookmark_save,customer_section_load</exclude_actions>
+                <clean_after_hours>48</clean_after_hours>
+                <query_log_active>1</query_log_active>
+                <query_log_all_queries>1</query_log_all_queries>
+                <query_log_query_time>0.05</query_log_query_time>
+                <query_log_call_stack>0</query_log_call_stack>
+                <query_log_query_chunks>50</query_log_query_chunks>
+                <query_log_clean_after_hours>48</query_log_clean_after_hours>
+            </foggyline_sentinel>
+        </system>
+    </default>
+</config>

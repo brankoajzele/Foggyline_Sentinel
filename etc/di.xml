@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Foggyline. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Foggyline\Sentinel\Api\Data\LogSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Foggyline\Sentinel\Api\Data\LogInterface" type="Foggyline\Sentinel\Model\Log"/>
+    <preference for="Foggyline\Sentinel\Api\LogRepositoryInterface" type="Foggyline\Sentinel\Model\LogRepository"/>
+
+    <!--
+        By default Magento uses
+            <preference for="Magento\Framework\DB\LoggerInterface" type="Magento\Framework\DB\Logger\Quiet"/>
+        We are setting it to our own logger here
+    -->
+    <preference for="Magento\Framework\DB\LoggerInterface" type="Foggyline\Sentinel\Model\DB\Logger\File"/>
+
+    <type name="Magento\Customer\Api\AccountManagementInterface">
+        <plugin name="foggyline-sentinel-customer-authenticate" type="Foggyline\Sentinel\Model\Customer\AccountManagementPlugin" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Framework\HTTP\Adapter\Curl">
+        <plugin name="foggyline-sentinel-framework-http-adapter-curl" type="Foggyline\Sentinel\Model\Framework\HTTP\Adapter\CurlPlugin" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="foggyline_sentinel_access_log_listing_data_source" xsi:type="string">Foggyline\Sentinel\Model\ResourceModel\AccessLog\Grid\Collection</item>
+                <item name="foggyline_sentinel_curl_log_listing_data_source" xsi:type="string">Foggyline\Sentinel\Model\ResourceModel\CurlLog\Grid\Collection</item>
+                <item name="foggyline_sentinel_login_log_listing_data_source" xsi:type="string">Foggyline\Sentinel\Model\ResourceModel\LoginLog\Grid\Collection</item>
+                <item name="foggyline_sentinel_query_log_listing_data_source" xsi:type="string">Foggyline\Sentinel\Model\ResourceModel\QueryLog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Access Logs -->
+    <type name="Foggyline\Sentinel\Model\ResourceModel\AccessLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">foggyline_sentinel_access_log</argument>
+            <argument name="eventPrefix" xsi:type="string">foggyline_sentinel_access_log_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">sentinel_access_log_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Foggyline\Sentinel\Model\ResourceModel\AccessLog</argument>
+        </arguments>
+    </type>
+    <virtualType name="SentinelAccessLogGridFilterPool"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SentinelAccessLogGridDataProvider"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Foggyline\Sentinel\Model\ResourceModel\AccessLog\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SentinelAccessLogGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- cURL Logs -->
+    <type name="Foggyline\Sentinel\Model\ResourceModel\CurlLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">foggyline_sentinel_curl_log</argument>
+            <argument name="eventPrefix" xsi:type="string">foggyline_sentinel_curl_log_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">sentinel_curl_log_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Foggyline\Sentinel\Model\ResourceModel\CurlLog</argument>
+        </arguments>
+    </type>
+    <virtualType name="SentinelCurlLogGridFilterPool"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SentinelCurlLogGridDataProvider"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Foggyline\Sentinel\Model\ResourceModel\CurlLog\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SentinelCurlLogGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Login logs -->
+    <type name="Foggyline\Sentinel\Model\ResourceModel\LoginLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">foggyline_sentinel_login_log</argument>
+            <argument name="eventPrefix" xsi:type="string">foggyline_sentinel_login_log_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">sentinel_login_log_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Foggyline\Sentinel\Model\ResourceModel\LoginLog</argument>
+        </arguments>
+    </type>
+    <virtualType name="SentinelLoginLogGridFilterPool"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">
+                    Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter
+                </item>
+                <item name="fulltext" xsi:type="object">
+                    Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SentinelLoginLogGridDataProvider"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">
+                Foggyline\Sentinel\Model\ResourceModel\LoginLog\Collection
+            </argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SentinelLoginLogGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Query Logs -->
+    <type name="Foggyline\Sentinel\Model\ResourceModel\QueryLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">foggyline_sentinel_query_log</argument>
+            <argument name="eventPrefix" xsi:type="string">foggyline_sentinel_query_log_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">sentinel_query_log_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Foggyline\Sentinel\Model\ResourceModel\QueryLog</argument>
+        </arguments>
+    </type>
+    <virtualType name="SentinelQueryLogGridFilterPool"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SentinelQueryLogGridDataProvider"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Foggyline\Sentinel\Model\ResourceModel\QueryLog\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SentinelQueryLogGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+</config>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Foggyline. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::system">
+                    <resource id="Magento_Backend::tools">
+                        <resource id="Foggyline_Sentinel::access_log" title="Foggyline Sentinel Access Logs" sortOrder="310" />
+                        <resource id="Foggyline_Sentinel::curl_log" title="Foggyline Sentinel cURL logs" sortOrder="320" />
+                        <resource id="Foggyline_Sentinel::login_log" title="Foggyline Sentinel Login logs" sortOrder="330" />
+                        <resource id="Foggyline_Sentinel::query_log" title="Foggyline Sentinel Query logs" sortOrder="340" />
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Foggyline. All rights reserved.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- Foggyline Sentinel Access Log -->
+    <route url="/V1/Foggyline/Sentinel/access/log/:logId" method="GET">
+        <service class="Foggyline\Sentinel\Api\AccessLogRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Foggyline_Sentinel::access_log"/>
+        </resources>
+    </route>
+    <route url="/V1/Foggyline/Sentinel/access/log/search" method="GET">
+        <service class="Foggyline\Sentinel\Api\AccessLogRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Foggyline_Sentinel::access_log"/>
+        </resources>
+    </route>
+    <route url="/V1/Foggyline/Sentinel/access/log" method="POST">
+        <service class="Foggyline\Sentinel\Api\AccessLogRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Foggyline_Sentinel::access_log"/>
+        </resources>
+    </route>
+    <route url="/V1/Foggyline/Sentinel/access/log/:id" method="PUT">
+        <service class="Foggyline\Sentinel\Api\AccessLogRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Foggyline_Sentinel::access_log"/>
+        </resources>
+    </route>
+    <route url="/V1/Foggyline/Sentinel/access/log/:logId" method="DELETE">
+        <service class="Foggyline\Sentinel\Api\AccessLogRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Foggyline_Sentinel::access_log"/>
+        </resources>
+    </route>
+</routes>

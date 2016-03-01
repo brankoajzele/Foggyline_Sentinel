@@ -87,13 +87,6 @@ class InstallSchema implements InstallSchemaInterface
                 'Client IP'
             )
             ->addColumn(
-                'country_by_geo_ip',
-                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                null,
-                [],
-                'Country by GEO IP'
-            )
-            ->addColumn(
                 'request_string',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 null,

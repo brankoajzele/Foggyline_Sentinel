@@ -97,7 +97,6 @@ class Observer implements \Magento\Framework\Event\ObserverInterface
         $log->setActionName($request->getActionName());
         $log->setFullActionName($request->getFullActionName());
         $log->setClientIp($request->getClientIp());
-        $log->setCountryByGeoIp('Croatia');
         $log->setRequestString($request->getRequestString());
         $log->setRequestMethod($request->getMethod());
         $log->setHttpGetParams($_GET);

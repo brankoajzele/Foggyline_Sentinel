@@ -25,7 +25,6 @@ interface AccessLogInterface
     const ACTION_NAME = 'action_name';
     const FULL_ACTION_NAME = 'full_action_name';
     const CLIENT_IP = 'client_ip';
-    const COUNTRY_BY_GEO_IP = 'country_by_geo_ip';
     const REQUEST_STRING = 'request_string';
     const REQUEST_METHOD = 'request_method';
     const HTTP_GET_PARAMS = 'http_get_params';
@@ -185,21 +184,6 @@ interface AccessLogInterface
      * @return \Foggyline\Sentinel\Api\Data\AccessLogInterface
      */
     public function setClientIp($clientIp);
-
-    /**
-     * Get country_by_geo_ip
-     *
-     * @return string|null
-     */
-    public function getCountryByGeoIp();
-
-    /**
-     * Set country_by_geo_ip
-     *
-     * @param string $countryByGeoIp
-     * @return \Foggyline\Sentinel\Api\Data\AccessLogInterface
-     */
-    public function setCountryByGeoIp($countryByGeoIp);
 
     /**
      * Get request_string

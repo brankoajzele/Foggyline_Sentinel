@@ -250,28 +250,6 @@ class AccessLog extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Get country_by_geo_ip
-     *
-     * @return string|null
-     */
-    public function getCountryByGeoIp()
-    {
-        return $this->getData(self::COUNTRY_BY_GEO_IP);
-    }
-
-    /**
-     * Set country_by_geo_ip
-     *
-     * @param string $countryByGeoIp
-     * @return \Foggyline\Sentinel\Api\Data\AccessLogInterface
-     */
-    public function setCountryByGeoIp($countryByGeoIp)
-    {
-        $this->setData(self::COUNTRY_BY_GEO_IP, $countryByGeoIp);
-        return $this;
-    }
-
-    /**
      * Get request_string
      *
      * @return string|null

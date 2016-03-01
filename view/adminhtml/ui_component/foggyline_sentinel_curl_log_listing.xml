@@ -73,18 +73,18 @@
 
 
         <!-- @todo Fully understand the inner workings! -->
-        <filterSearch name="fulltext">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="provider" xsi:type="string">foggyline_sentinel_curl_log_listing.foggyline_sentinel_curl_log_listing_data_source</item>
-                    <item name="chipsProvider" xsi:type="string">foggyline_sentinel_curl_log_listing.foggyline_sentinel_curl_log_listing.listing_top.listing_filters_chips</item>
-                    <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_curl_log_listing.foggyline_sentinel_curl_log_listing.listing_top.bookmarks</item>
-                        <item name="namespace" xsi:type="string">current.search</item>
-                    </item>
-                </item>
-            </argument>
-        </filterSearch>
+        <!--<filterSearch name="fulltext">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="provider" xsi:type="string">foggyline_sentinel_curl_log_listing.foggyline_sentinel_curl_log_listing_data_source</item>-->
+                    <!--<item name="chipsProvider" xsi:type="string">foggyline_sentinel_curl_log_listing.foggyline_sentinel_curl_log_listing.listing_top.listing_filters_chips</item>-->
+                    <!--<item name="storageConfig" xsi:type="array">-->
+                        <!--<item name="provider" xsi:type="string">foggyline_sentinel_curl_log_listing.foggyline_sentinel_curl_log_listing.listing_top.bookmarks</item>-->
+                        <!--<item name="namespace" xsi:type="string">current.search</item>-->
+                    <!--</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</filterSearch>-->
 
 
 
@@ -122,25 +122,42 @@
 
 
         <massaction name="listing_massaction">
+
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="selectProvider" xsi:type="string">foggyline_sentinel_curl_log_listing.foggyline_sentinel_curl_log_listing.foggyline_sentinel_curl_log_columns.ids</item>
-                    <item name="displayArea" xsi:type="string">bottom</item>
-                    <item name="actions" xsi:type="array">
-                        <item name="delete" xsi:type="array">
-                            <item name="type" xsi:type="string">delete</item>
-                            <item name="label" xsi:type="string" translate="true">Delete</item>
-                            <item name="url" xsi:type="string">cms/block/massDelete</item>
-                            <item name="confirm" xsi:type="array">
-                                <item name="title" xsi:type="string" translate="true">Delete items</item>
-                                <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
-                            </item>
-                        </item>
-                    </item>
                     <item name="indexField" xsi:type="string">entity_id</item>
                 </item>
             </argument>
+            <action name="cancel">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">cancel</item>
+                        <item name="label" xsi:type="string" translate="true">Cancel</item>
+                        <item name="url" xsi:type="url" path="sales/order/massCancel"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="sales/order/massDelete"/>
+                    </item>
+                </argument>
+            </action>
         </massaction>
+
+
+
+
+
+
+
+
+
+
         <paging name="listing_paging">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -207,7 +224,6 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">entity_id</item>
-                    <item name="sortOrder" xsi:type="number">0</item>
                 </item>
             </argument>
         </selectionsColumn>
@@ -218,7 +234,6 @@
                     <item name="filter" xsi:type="string">textRange</item>
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" xsi:type="string" translate="true">ID</item>
-                    <item name="sortOrder" xsi:type="number">10</item>
                 </item>
             </argument>
         </column>
@@ -228,7 +243,6 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Method</item>
-                    <item name="sortOrder" xsi:type="number">60</item>
                 </item>
             </argument>
         </column>
@@ -245,7 +259,51 @@
         </column>
 
 
+        <column name="store_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Store</item>
+                </item>
+            </argument>
+        </column>
 
+        <column name="result">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Result</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="url">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="total_time">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Total Time</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="content_type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Content Type</item>
+                </item>
+            </argument>
+        </column>
 
 
     </columns>

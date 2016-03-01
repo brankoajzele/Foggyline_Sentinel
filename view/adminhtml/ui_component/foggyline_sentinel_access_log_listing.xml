@@ -10,7 +10,7 @@
             <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing_data_source</item>
             <item name="deps" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing_data_source</item>
         </item>
-        <item name="spinner" xsi:type="string">foggyline_sentinel_log_columns</item>
+        <item name="spinner" xsi:type="string">foggyline_sentinel_access_log_columns</item>
         <!--<item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
@@ -22,7 +22,7 @@
     </argument>
     <dataSource name="foggyline_sentinel_access_log_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">SentinelAccessLogGridDataProvider</argument>
+            <argument name="class" xsi:type="string">SentinelCurlLogGridDataProvider</argument>
             <argument name="name" xsi:type="string">foggyline_sentinel_access_log_listing_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
@@ -57,305 +57,107 @@
                 </item>
             </argument>
         </bookmark>
-        <container name="columns_controls">
+
+
+        <component name="columns_controls">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="columnsData" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_log_columns</item>
+                        <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_columns</item>
                     </item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
                     <item name="displayArea" xsi:type="string">dataGridActions</item>
                 </item>
             </argument>
-        </container>
-        <filterSearch name="fulltext">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/search/search</item>
-                    <item name="displayArea" xsi:type="string">dataGridFilters</item>
-                    <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing_data_source</item>
-                    <item name="chipsProvider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.listing_filters_chips</item>
-                    <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.bookmarks</item>
-                        <item name="namespace" xsi:type="string">current.search</item>
-                    </item>
-                </item>
-            </argument>
-        </filterSearch>
+        </component>
+
+
+        <!-- @todo Fully understand the inner workings! -->
+        <!--<filterSearch name="fulltext">-->
+        <!--<argument name="data" xsi:type="array">-->
+        <!--<item name="config" xsi:type="array">-->
+        <!--<item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing_data_source</item>-->
+        <!--<item name="chipsProvider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.listing_filters_chips</item>-->
+        <!--<item name="storageConfig" xsi:type="array">-->
+        <!--<item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.bookmarks</item>-->
+        <!--<item name="namespace" xsi:type="string">current.search</item>-->
+        <!--</item>-->
+        <!--</item>-->
+        <!--</argument>-->
+        <!--</filterSearch>-->
+
+
+
         <filters name="listing_filters">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="displayArea" xsi:type="string">dataGridFilters</item>
-                    <item name="dataScope" xsi:type="string">filters</item>
+                    <item name="columnsProvider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_columns</item>
                     <item name="storageConfig" xsi:type="array">
                         <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.filters</item>
                     </item>
-                    <item name="childDefaults" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.listing_filters</item>
-                        <item name="imports" xsi:type="array">
-                            <item name="visible" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.bookmarks:current.columns.${ $.index }.visible</item>
-                        </item>
-                    </item>
                 </item>
             </argument>
-
-
-
-
-            <filterRange name="entity_id">
+            <filterSelect name="store_id">
+                <argument name="optionsProvider" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Magento\Store\Ui\Component\Listing\Column\Store\Options</argument>
+                </argument>
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">entity_id</item>
-                        <item name="label" xsi:type="string" translate="true">ID</item>
-                        <item name="childDefaults" xsi:type="array">
-                            <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.listing_filters</item>
-                        </item>
+                        <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.listing_filters</item>
+                        <item name="dataScope" xsi:type="string">store_id</item>
+                        <item name="caption" xsi:type="string" translate="true">All Store Views</item>
+                        <item name="label" xsi:type="string" translate="true">Store View</item>
                     </item>
                 </argument>
-                <filterInput name="from">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="dataScope" xsi:type="string">from</item>
-                            <item name="label" xsi:type="string" translate="true">from</item>
-                            <item name="placeholder" xsi:type="string" translate="true">From</item>
-                        </item>
-                    </argument>
-                </filterInput>
-                <filterInput name="to">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="dataScope" xsi:type="string">to</item>
-                            <item name="label" xsi:type="string" translate="true">to</item>
-                            <item name="placeholder" xsi:type="string" translate="true">To</item>
-                        </item>
-                    </argument>
-                </filterInput>
-            </filterRange>
-
-
-
-            <filterRange name="created_at"  class="Magento\Ui\Component\Filters\Type\DateRange">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">creation_time</item>
-                        <item name="label" xsi:type="string" translate="true">Created</item>
-                        <item name="childDefaults" xsi:type="array">
-                            <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.listing_filters</item>
-                        </item>
-                    </item>
-                </argument>
-                <filterDate name="from">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="dataScope" xsi:type="string">from</item>
-                            <item name="label" xsi:type="string" translate="true">From</item>
-                            <item name="placeholder" xsi:type="string" translate="true">From</item>
-                            <item name="dateFormat" xsi:type="string" translate="true">MM/dd/YYYY</item>
-                        </item>
-                    </argument>
-                </filterDate>
-                <filterDate name="to">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="dataScope" xsi:type="string">to</item>
-                            <item name="label" xsi:type="string" translate="true">To</item>
-                            <item name="placeholder" xsi:type="string" translate="true">To</item>
-                            <item name="dateFormat" xsi:type="string" translate="true">MM/dd/YYYY</item>
-                        </item>
-                    </argument>
-                </filterDate>
-            </filterRange>
-
-
-
-
-
-
-            <filterInput name="user_id">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">user_id</item>
-                        <item name="label" xsi:type="string" translate="true">User ID</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-
-            <filterInput name="user_username">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">user_username</item>
-                        <item name="label" xsi:type="string" translate="true">Username</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="user_email">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">user_email</item>
-                        <item name="label" xsi:type="string" translate="true">Email</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-
-
-            <filterInput name="user_name">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">user_name</item>
-                        <item name="label" xsi:type="string" translate="true">Full Name</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-
-            <filterInput name="action_name">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">action_name</item>
-                        <item name="label" xsi:type="string" translate="true">Action Name</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="full_action_name">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">full_action_name</item>
-                        <item name="label" xsi:type="string" translate="true">Full Action Name</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="client_ip">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">client_ip</item>
-                        <item name="label" xsi:type="string" translate="true">Client IP</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="country_by_geo_ip">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">country_by_geo_ip</item>
-                        <item name="label" xsi:type="string" translate="true">Country</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="request_string">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">request_string</item>
-                        <item name="label" xsi:type="string" translate="true">Request String</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="request_method">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">request_method</item>
-                        <item name="label" xsi:type="string" translate="true">Request Method</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="http_get_params">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">http_get_params</item>
-                        <item name="label" xsi:type="string" translate="true">HTTP GET Params</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="http_post_params">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">http_post_params</item>
-                        <item name="label" xsi:type="string" translate="true">HTTP POST Params</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="http_files_params">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">http_files_params</item>
-                        <item name="label" xsi:type="string" translate="true">HTTP FILES Params</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="module_name">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">module_name</item>
-                        <item name="label" xsi:type="string" translate="true">Module Name</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="controller_module">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">controller_module</item>
-                        <item name="label" xsi:type="string" translate="true">Controller Module</item>
-                    </item>
-                </argument>
-            </filterInput>
-
-
-            <filterInput name="area">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="dataScope" xsi:type="string">area</item>
-                        <item name="label" xsi:type="string" translate="true">Area</item>
-                    </item>
-                </argument>
-            </filterInput>
-
+            </filterSelect>
         </filters>
+
+
+
+
+
+
+
+
+
         <massaction name="listing_massaction">
+
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_log_columns.ids</item>
-                    <item name="displayArea" xsi:type="string">bottom</item>
-                    <item name="actions" xsi:type="array">
-                        <item name="delete" xsi:type="array">
-                            <item name="type" xsi:type="string">delete</item>
-                            <item name="label" xsi:type="string" translate="true">Delete</item>
-                            <item name="url" xsi:type="string">cms/block/massDelete</item>
-                            <item name="confirm" xsi:type="array">
-                                <item name="title" xsi:type="string" translate="true">Delete items</item>
-                                <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
-                            </item>
-                        </item>
-                    </item>
+                    <item name="selectProvider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_columns.ids</item>
                     <item name="indexField" xsi:type="string">entity_id</item>
                 </item>
             </argument>
+            <action name="cancel">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">cancel</item>
+                        <item name="label" xsi:type="string" translate="true">Cancel</item>
+                        <item name="url" xsi:type="url" path="sales/order/massCancel"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="sales/order/massDelete"/>
+                    </item>
+                </argument>
+            </action>
         </massaction>
+
+
+
+
+
+
+
+
+
+
         <paging name="listing_paging">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -363,7 +165,7 @@
                         <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.paging</item>
                     </item>
-                    <item name="selectProvider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_log_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_columns.ids</item>
                     <item name="displayArea" xsi:type="string">bottom</item>
                     <item name="options" xsi:type="array">
                         <item name="20" xsi:type="array">
@@ -391,7 +193,7 @@
             </argument>
         </paging>
     </container>
-    <columns name="foggyline_sentinel_log_columns">
+    <columns name="foggyline_sentinel_access_log_columns">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="storageConfig" xsi:type="array">
@@ -400,7 +202,7 @@
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_log_columns.logs</item>
+                        <item name="provider" xsi:type="string">foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_listing.foggyline_sentinel_access_log_columns.access_logs</item>
                         <item name="target" xsi:type="string">applyAction</item>
                         <item name="params" xsi:type="array">
                             <item name="0" xsi:type="string">edit</item>
@@ -416,162 +218,72 @@
                 </item>
             </item>
         </argument>
-        <column name="ids" class="Magento\Ui\Component\MassAction\Columns\Column">
+
+
+        <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/multiselect</item>
-                </item>
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">entity_id</item>
-                    <item name="controlVisibility" xsi:type="boolean">false</item>
                 </item>
             </argument>
-        </column>
+        </selectionsColumn>
+
         <column name="entity_id">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="sorting" xsi:type="string">desc</item>
-                    <item name="align" xsi:type="string">left</item>
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" xsi:type="string" translate="true">ID</item>
                 </item>
             </argument>
         </column>
-        <column name="created_at">
+
+        <column name="user_email">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">User Email</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
-                </item>
-                <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">date</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Created</item>
-                </item>
-            </argument>
-        </column>
-        <column name="user_name">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Full Name</item>
+                    <item name="label" xsi:type="string" translate="true">Created At</item>
                 </item>
             </argument>
         </column>
 
-
-        <column name="action_name">
-            <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
-                <item name="config" xsi:type="array">
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Action</item>
-                </item>
-            </argument>
-        </column>
         <column name="full_action_name">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
                 <item name="config" xsi:type="array">
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Full Action</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Action</item>
                 </item>
             </argument>
         </column>
 
         <column name="request_method">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Request Method</item>
-                </item>
-            </argument>
-        </column>
-
-        <column name="controller_module">
-            <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
-                <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Controller Module</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Method</item>
                 </item>
             </argument>
         </column>
 
         <column name="area">
             <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Area</item>
                 </item>
             </argument>
         </column>
 
-
-        <column name="client_ip">
-            <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
-                <item name="config" xsi:type="array">
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Client IP</item>
-                </item>
-            </argument>
-        </column>
-        <column name="country_by_geo_ip">
-            <argument name="data" xsi:type="array">
-                <item name="js_config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                </item>
-                <item name="config" xsi:type="array">
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Country</item>
-                </item>
-            </argument>
-        </column>
-
-
-        <!--<column name="actions" class="Magento\Cms\Ui\Component\Listing\Column\BlockActions">-->
-            <!--<argument name="data" xsi:type="array">-->
-                <!--<item name="config" xsi:type="array">-->
-                    <!--<item name="draggable" xsi:type="boolean">false</item>-->
-                    <!--<item name="dataType" xsi:type="string">actions</item>-->
-                    <!--<item name="indexField" xsi:type="string">entity_id</item>-->
-                    <!--<item name="align" xsi:type="string">left</item>-->
-                    <!--<item name="label" xsi:type="string" translate="true">Action</item>-->
-                    <!--<item name="data_type" xsi:type="string">actions</item>-->
-                    <!--<item name="filterable" xsi:type="boolean">false</item>-->
-                    <!--<item name="sortable" xsi:type="boolean">false</item>-->
-                <!--</item>-->
-            <!--</argument>-->
-        <!--</column>-->
     </columns>
 </listing>

@@ -7,7 +7,7 @@ namespace Foggyline\Sentinel\Model;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-class Observer
+class Observer implements \Magento\Framework\Event\ObserverInterface
 {
     /**
      * @var \Foggyline\Sentinel\Helper\Data
@@ -64,7 +64,7 @@ class Observer
      * @param \Magento\Framework\Event\Observer $observer
      * @return $this
      */
-    public function log(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer)
     {
         /* @var $request \Magento\Framework\App\Request\Http */
         $request = $observer->getEvent()->getRequest();
@@ -78,7 +78,7 @@ class Observer
         if (!$this->helper->isFoggylineSentinelActive()
             OR in_array($areaCode, $this->helper->getExcludeAreas())
             OR in_array($request->getFullActionName(), $this->helper->getExcludeActions())) {
-            return $this;
+            //return $this;
         }
 
         /* @var $log \Foggyline\Sentinel\Model\AccessLog */

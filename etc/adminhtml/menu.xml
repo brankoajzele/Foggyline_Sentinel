@@ -6,9 +6,9 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Foggyline_Sentinel::access_log" title="Sentinel Access Logs by Foggyline" module="Foggyline_Sentinel" sortOrder="90" parent="Magento_Backend::system_tools" action="foggyline_sentinel/access" resource="Foggyline_Sentinel::access_log"/>
-        <add id="Foggyline_Sentinel::curl_log" title="Sentinel cURL Logs by Foggyline" module="Foggyline_Sentinel" sortOrder="90" parent="Magento_Backend::system_tools" action="foggyline_sentinel/curl" resource="Foggyline_Sentinel::curl_log"/>
-        <add id="Foggyline_Sentinel::login_log" title="Sentinel Login Logs by Foggyline" module="Foggyline_Sentinel" sortOrder="90" parent="Magento_Backend::system_tools" action="foggyline_sentinel/login" resource="Foggyline_Sentinel::login_log"/>
-        <add id="Foggyline_Sentinel::query_log" title="Sentinel Query Logs by Foggyline" module="Foggyline_Sentinel" sortOrder="90" parent="Magento_Backend::system_tools" action="foggyline_sentinel/query" resource="Foggyline_Sentinel::query_log"/>
+        <add id="Foggyline_Sentinel::access_log" title="Sentinel Access Logs" module="Foggyline_Sentinel" sortOrder="90" parent="Magento_Backend::system_tools" action="foggyline_sentinel/access" resource="Foggyline_Sentinel::access_log"/>
+        <add id="Foggyline_Sentinel::curl_log" title="Sentinel cURL Logs" module="Foggyline_Sentinel" sortOrder="90" parent="Magento_Backend::system_tools" action="foggyline_sentinel/curl" resource="Foggyline_Sentinel::curl_log"/>
+        <add id="Foggyline_Sentinel::login_log" title="Sentinel Login Logs" module="Foggyline_Sentinel" sortOrder="90" parent="Magento_Backend::system_tools" action="foggyline_sentinel/login" resource="Foggyline_Sentinel::login_log"/>
+        <add id="Foggyline_Sentinel::query_log" title="Sentinel Query Logs" module="Foggyline_Sentinel" sortOrder="90" parent="Magento_Backend::system_tools" action="foggyline_sentinel/query" resource="Foggyline_Sentinel::query_log"/>
     </menu>
 </config>

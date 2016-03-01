@@ -4,11 +4,9 @@
  * Copyright © 2016 Foggyline. All rights reserved.
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
 
-    <event name="controller_front_send_response_before">
-        <observer name="foggyline_sentinel_log" instance="Foggyline\Sentinel\Model\Observer" method="log"/>
-    </event>
-
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<event name="controller_action_predispatch">
+    <observer name="foggyline_sentinel_log" instance="Foggyline\Sentinel\Model\Observer" />
+</event>
 </config>

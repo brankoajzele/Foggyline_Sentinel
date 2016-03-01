@@ -38,7 +38,7 @@ class AccountManagementPlugin
         $this->helper = $helper;
     }
 
-    public function aroundAuthenticate(
+        public function aroundAuthenticate(
         \Magento\Customer\Api\AccountManagementInterface $subject,
         \Closure $proceed,
         $username,

@@ -85,7 +85,8 @@ class AccessLogRepository implements \Foggyline\Sentinel\Api\AccessLogRepository
         $log = $this->logFactory->create();
         $this->resource->load($log, $logId);
         if (!$log->getId()) {
-            throw new \Magento\Framework\Exception\NoSuchEntityException(__('AccessLog with id "%1" does not exist.', $logId));
+            $errMsg = 'AccessLog with id "%1" does not exist.';
+            throw new \Magento\Framework\Exception\NoSuchEntityException(__($errMsg, $logId));
         }
         return $log;
     }

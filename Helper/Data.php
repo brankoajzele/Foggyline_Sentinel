@@ -12,8 +12,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_EXCLUDE_ACTIONS = 'system/foggyline_sentinel/exclude_actions';
     const XML_PATH_CLEAN_AFTER_HOURS = 'system/foggyline_sentinel/clean_after_hours';
 
-    const XML_PATH_QUERY_LOG_ACTIVE  = 'system/foggyline_sentinel/query_log_active';
-    const XML_PATH_QUERY_LOG_ALL_QUERIES  = 'system/foggyline_sentinel/query_log_all_queries';
+    const XML_PATH_QUERY_LOG_ACTIVE = 'system/foggyline_sentinel/query_log_active';
+    const XML_PATH_QUERY_LOG_ALL_QUERIES = 'system/foggyline_sentinel/query_log_all_queries';
     const XML_PATH_QUERY_LOG_QUERY_TIME = 'system/foggyline_sentinel/query_log_query_time';
     const XML_PATH_QUERY_LOG_CALL_STACK = 'system/foggyline_sentinel/query_log_call_stack';
     const XML_PATH_QUERY_LOG_QUERY_CHUNKS = 'system/foggyline_sentinel/query_log_query_chunks';

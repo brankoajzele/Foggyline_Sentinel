@@ -51,13 +51,9 @@ class Cron
             /* Here we do a fast cleanup, directly on database, no individual objects */
             $connection = $this->resource->getConnection();
             $connection->beginTransaction();
-
             $condition = ['created_at < (NOW() - INTERVAL ? HOUR)' => $this->helper->getCleanAfterHours()];
-
             $connection->delete($this->resource->getTableName('foggyline_sentinel_log'), $condition);
-
             $connection->commit();
-
             $this->logger->info('Cron job foggyline_sentinel_cleanup executed');
         } catch (\Exception $e) {
             $connection->rollBack();

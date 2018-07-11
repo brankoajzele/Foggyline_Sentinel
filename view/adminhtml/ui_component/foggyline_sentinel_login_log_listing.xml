@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-/**
- * Copyright © 2016 Foggyline. All rights reserved.
- */
--->
-<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../Magento/Ui/etc/ui_configuration.xsd">
-    <argument name="data" xsi:type="array">
-        <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing_data_source</item>
-            <item name="deps" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing_data_source</item>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">    <argument name="data" xsi:type="array">
+    <item name="js_config" xsi:type="array">
+        <item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing_data_source</item>
+        <item name="deps" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing_data_source</item>
+    </item>
+    <item name="spinner" xsi:type="string">null_sentinel_login_log_columns</item>
+    <!--<item name="buttons" xsi:type="array">
+        <item name="add" xsi:type="array">
+            <item name="name" xsi:type="string">add</item>
+            <item name="label" xsi:type="string" translate="true">Add New Block</item>
+            <item name="class" xsi:type="string">primary</item>
+            <item name="url" xsi:type="string">*/*/new</item>
         </item>
-        <item name="spinner" xsi:type="string">foggyline_sentinel_login_log_columns</item>
-        <!--<item name="buttons" xsi:type="array">
-            <item name="add" xsi:type="array">
-                <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string" translate="true">Add New Block</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/*/new</item>
-            </item>
-        </item>-->
-    </argument>
-    <dataSource name="foggyline_sentinel_login_log_listing_data_source">
+    </item>-->
+</argument>
+    <dataSource name="null_sentinel_login_log_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">SentinelCurlLogGridDataProvider</argument>
-            <argument name="name" xsi:type="string">foggyline_sentinel_login_log_listing_data_source</argument>
+            <argument name="name" xsi:type="string">null_sentinel_login_log_listing_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
@@ -52,48 +46,41 @@
                     <item name="storageConfig" xsi:type="array">
                         <item name="saveUrl" xsi:type="url" path="mui/bookmark/save"/>
                         <item name="deleteUrl" xsi:type="url" path="mui/bookmark/delete"/>
-                        <item name="namespace" xsi:type="string">foggyline_sentinel_login_log_listing</item>
+                        <item name="namespace" xsi:type="string">null_sentinel_login_log_listing</item>
                     </item>
                 </item>
             </argument>
         </bookmark>
-
-
         <component name="columns_controls">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="columnsData" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_columns</item>
+                        <item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.null_sentinel_login_log_columns</item>
                     </item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
                     <item name="displayArea" xsi:type="string">dataGridActions</item>
                 </item>
             </argument>
         </component>
-
-
         <!-- @todo Fully understand the inner workings! -->
         <!--<filterSearch name="fulltext">-->
         <!--<argument name="data" xsi:type="array">-->
         <!--<item name="config" xsi:type="array">-->
-        <!--<item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing_data_source</item>-->
-        <!--<item name="chipsProvider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.listing_top.listing_filters_chips</item>-->
+        <!--<item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing_data_source</item>-->
+        <!--<item name="chipsProvider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.listing_top.listing_filters_chips</item>-->
         <!--<item name="storageConfig" xsi:type="array">-->
-        <!--<item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.listing_top.bookmarks</item>-->
+        <!--<item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.listing_top.bookmarks</item>-->
         <!--<item name="namespace" xsi:type="string">current.search</item>-->
         <!--</item>-->
         <!--</item>-->
         <!--</argument>-->
         <!--</filterSearch>-->
-
-
-
         <filters name="listing_filters">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="columnsProvider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_columns</item>
+                    <item name="columnsProvider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.null_sentinel_login_log_columns</item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.filters</item>
                     </item>
                 </item>
@@ -104,7 +91,7 @@
                 </argument>
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.listing_top.listing_filters</item>
+                        <item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.listing_top.listing_filters</item>
                         <item name="dataScope" xsi:type="string">store_id</item>
                         <item name="caption" xsi:type="string" translate="true">All Store Views</item>
                         <item name="label" xsi:type="string" translate="true">Store View</item>
@@ -112,20 +99,10 @@
                 </argument>
             </filterSelect>
         </filters>
-
-
-
-
-
-
-
-
-
         <massaction name="listing_massaction">
-
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.null_sentinel_login_log_columns.ids</item>
                     <item name="indexField" xsi:type="string">entity_id</item>
                 </item>
             </argument>
@@ -148,24 +125,14 @@
                 </argument>
             </action>
         </massaction>
-
-
-
-
-
-
-
-
-
-
         <paging name="listing_paging">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.paging</item>
                     </item>
-                    <item name="selectProvider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.null_sentinel_login_log_columns.ids</item>
                     <item name="displayArea" xsi:type="string">bottom</item>
                     <item name="options" xsi:type="array">
                         <item name="20" xsi:type="array">
@@ -193,16 +160,16 @@
             </argument>
         </paging>
     </container>
-    <columns name="foggyline_sentinel_login_log_columns">
+    <columns name="null_sentinel_login_log_columns">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.listing_top.bookmarks</item>
+                    <item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.listing_top.bookmarks</item>
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_columns.login_logs</item>
+                        <item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.null_sentinel_login_log_columns.login_logs</item>
                         <item name="target" xsi:type="string">applyAction</item>
                         <item name="params" xsi:type="array">
                             <item name="0" xsi:type="string">edit</item>
@@ -211,15 +178,13 @@
                     </item>
                     <item name="controlVisibility" xsi:type="boolean">true</item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">foggyline_sentinel_login_log_listing.foggyline_sentinel_login_log_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">null_sentinel_login_log_listing.null_sentinel_login_log_listing.listing_top.bookmarks</item>
                         <item name="root" xsi:type="string">columns.${ $.index }</item>
                         <item name="namespace" xsi:type="string">current.${ $.storageConfig.root }</item>
                     </item>
                 </item>
             </item>
         </argument>
-
-
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -227,7 +192,6 @@
                 </item>
             </argument>
         </selectionsColumn>
-
         <column name="entity_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -237,8 +201,6 @@
                 </item>
             </argument>
         </column>
-
-
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -249,8 +211,6 @@
                 </item>
             </argument>
         </column>
-
-
         <column name="store_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -260,7 +220,6 @@
                 </item>
             </argument>
         </column>
-
         <column name="type">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -269,7 +228,6 @@
                 </item>
             </argument>
         </column>
-
         <column name="identifier">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -278,7 +236,6 @@
                 </item>
             </argument>
         </column>
-
         <column name="login_status">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -287,8 +244,5 @@
                 </item>
             </argument>
         </column>
-
-
-
     </columns>
 </listing>

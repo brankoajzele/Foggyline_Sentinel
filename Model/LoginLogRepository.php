@@ -85,7 +85,8 @@ class LoginLogRepository implements \Foggyline\Sentinel\Api\LoginLogRepositoryIn
         $log = $this->logFactory->create();
         $this->resource->load($log, $logId);
         if (!$log->getId()) {
-            throw new \Magento\Framework\Exception\NoSuchEntityException(__('LoginLog with id "%1" does not exist.', $logId));
+            $errMsg = 'LoginLog with id "%1" does not exist.';
+            throw new \Magento\Framework\Exception\NoSuchEntityException(__($errMsg, $logId));
         }
         return $log;
     }

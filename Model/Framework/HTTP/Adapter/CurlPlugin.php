@@ -21,6 +21,11 @@ class CurlPlugin
      */
     protected $curlLog;
 
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
+
     /**#@+
      * Params to be set in "beforeWrite", so we can use them in "afterRead" method. A little bit of trickery to get
      * all the required info (body of request and response stuff).
@@ -32,16 +37,18 @@ class CurlPlugin
     protected $cUrlBody;
 
     /**#@-*/
-
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
         \Foggyline\Sentinel\Helper\Data $helper,
-        \Foggyline\Sentinel\Model\CurlLogFactory $curlLog
+        \Foggyline\Sentinel\Model\CurlLogFactory $curlLog,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     )
     {
         $this->logger = $logger;
         $this->helper = $helper;
         $this->curlLog = $curlLog;
+        $this->storeManager = $storeManager;
+
     }
 
     /**
@@ -59,6 +66,7 @@ class CurlPlugin
             $curlLog = $this->curlLog->create();
 
             $curlLog->setRequestId($this->helper->getHttpRequestUniqueId());
+            $curlLog->setStoreId($this->storeManager->getStore()->getId());
             $curlLog->setResult($result);
             $curlLog->setMethod($this->cUrlMethod);
             $curlLog->setUrl($this->cUrlUrl);

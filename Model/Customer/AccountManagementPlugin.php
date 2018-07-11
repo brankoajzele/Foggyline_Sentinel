@@ -1,6 +1,7 @@
 <?php
 
 namespace Foggyline\Sentinel\Model\Customer;
+
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
@@ -27,24 +28,29 @@ class AccountManagementPlugin
      */
     protected $logger;
 
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
+
     public function __construct(
         \Foggyline\Sentinel\Model\LoginLogFactory $loginLogFactory,
         \Psr\Log\LoggerInterface $logger,
-        \Foggyline\Sentinel\Helper\Data $helper
-    )
-    {
+        \Foggyline\Sentinel\Helper\Data $helper,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
         $this->loginLogFactory = $loginLogFactory;
         $this->logger = $logger;
         $this->helper = $helper;
+        $this->storeManager = $storeManager;
     }
 
-        public function aroundAuthenticate(
+    public function aroundAuthenticate(
         \Magento\Customer\Api\AccountManagementInterface $subject,
         \Closure $proceed,
         $username,
         $password
-    )
-    {
+    ) {
         /* Skip execution if module is not active */
         if (!$this->helper->isFoggylineSentinelActive()) {
             return $proceed($username, $password);
@@ -68,6 +74,7 @@ class AccountManagementPlugin
             /* @var $loginLog \Foggyline\Sentinel\Model\LoginLog */
             $loginLog = $this->loginLogFactory->create();
             $loginLog->setIdentifier($username);
+            $loginLog->setStoreId($this->storeManager->getStore()->getId());
             $loginLog->setRequestId($this->helper->getHttpRequestUniqueId());
             $loginLog->setType(\Foggyline\Sentinel\Model\LoginLog::TYPE_CUSTOMER);
             $loginLog->setLoginStatus(\Foggyline\Sentinel\Model\LoginLog::LOGIN_STATUS_SUCCESS);
@@ -83,6 +90,7 @@ class AccountManagementPlugin
             /* @var $loginLog \Foggyline\Sentinel\Model\LoginLog */
             $loginLog = $this->loginLogFactory->create();
             $loginLog->setIdentifier($username);
+            $loginLog->setStoreId($this->storeManager->getStore()->getId());
             $loginLog->setRequestId($this->helper->getHttpRequestUniqueId());
             $loginLog->setType(\Foggyline\Sentinel\Model\LoginLog::TYPE_CUSTOMER);
             $loginLog->setLoginStatus(\Foggyline\Sentinel\Model\LoginLog::LOGIN_STATUS_FAIL);

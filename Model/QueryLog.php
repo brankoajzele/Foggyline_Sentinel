@@ -95,7 +95,6 @@ class QueryLog extends \Magento\Framework\Model\AbstractModel
         return $this;
     }
 
-
     /**
      * Get type
      *
